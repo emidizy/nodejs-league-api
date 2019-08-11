@@ -47,7 +47,7 @@ app.use(bodyParser.json());
 app.use('/', apiRoutes);  
 
 //App PORT
-const port = config.PORT || 3000;
+const port = process.env.PORT || config.PORT;
 app.listen(port, () => {
     console.log(`Application listening on port ` + port);
 })
