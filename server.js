@@ -44,8 +44,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 //App Routes
-app.use('/api', apiRoutes);
-    
+app.use('/', apiRoutes);  
 
 //App PORT
 const port = config.PORT || 3000;

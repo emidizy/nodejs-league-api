@@ -15,34 +15,34 @@ const activityController = require('../controllers/user/activity-controller');
 const searchController = require('../controllers/public/searchController');
 
 //APP ROUTES
-router.get('/', (req, res) => {
-    
-    res.json({
-        status: 'Api is Live',
-        message: 'Welcome to Premier League API hub. Developed by Diala Emmanuel'
-    })
-});
-router.post('/user/signup', signupController.register);
-router.post('/user/login', loginController.signIn);
+router.get('/', (req, res) => res.redirect('/api'))
+    .get('/api', (req, res) => {
+        res.json({
+            status: 'Api is Live',
+            message: 'Welcome to Premier League API hub. Developed by Diala Emmanuel'
+        });
+    });
+router.post('/api/user/signup', signupController.register);
+router.post('/api/user/login', loginController.signIn);
 
-router.post('/admin/signup', adminSignUpController.register);
-router.post('/admin/login', adminLoginController.signIn);
+router.post('/api/admin/signup', adminSignUpController.register);
+router.post('/api/admin/login', adminLoginController.signIn);
 
-router.post('/admin/teams/add', reqInterceptor.validateToken, reqInterceptor.confirmAdminRole, teamsController.create);
-router.get('/admin/teams/:id?', reqInterceptor.validateToken, reqInterceptor.confirmAdminRole, teamsController.viewTeams);
-router.put('/admin/teams/edit', reqInterceptor.validateToken, reqInterceptor.confirmAdminRole, teamsController.modifyTeam);
-router.delete('/admin/teams/delete/:id', reqInterceptor.validateToken, reqInterceptor.confirmAdminRole, teamsController.deleteTeam);
+router.post('/api/admin/teams/add', reqInterceptor.validateToken, reqInterceptor.confirmAdminRole, teamsController.create);
+router.get('/api/admin/teams/:id?', reqInterceptor.validateToken, reqInterceptor.confirmAdminRole, teamsController.viewTeams);
+router.put('/api/admin/teams/edit', reqInterceptor.validateToken, reqInterceptor.confirmAdminRole, teamsController.modifyTeam);
+router.delete('/api/admin/teams/delete/:id', reqInterceptor.validateToken, reqInterceptor.confirmAdminRole, teamsController.deleteTeam);
 
-router.post('/admin/fixtures/add', reqInterceptor.validateToken, reqInterceptor.confirmAdminRole, fixturesController.create);
-router.get('/admin/fixtures/:id?', reqInterceptor.validateToken, reqInterceptor.confirmAdminRole, fixturesController.viewFixtures);
-router.put('/admin/fixtures/edit', reqInterceptor.validateToken, reqInterceptor.confirmAdminRole, fixturesController.modifyFixture);
-router.delete('/admin/fixtures/delete/:id', reqInterceptor.validateToken, reqInterceptor.confirmAdminRole, fixturesController.deleteFixture);
-router.post('/admin/fixtures/url/generate', reqInterceptor.validateToken, reqInterceptor.confirmAdminRole, fixturesController.generateFixtureUrl);
+router.post('/api/admin/fixtures/add', reqInterceptor.validateToken, reqInterceptor.confirmAdminRole, fixturesController.create);
+router.get('/api/admin/fixtures/:id?', reqInterceptor.validateToken, reqInterceptor.confirmAdminRole, fixturesController.viewFixtures);
+router.put('/api/admin/fixtures/edit', reqInterceptor.validateToken, reqInterceptor.confirmAdminRole, fixturesController.modifyFixture);
+router.delete('/api/admin/fixtures/delete/:id', reqInterceptor.validateToken, reqInterceptor.confirmAdminRole, fixturesController.deleteFixture);
+router.post('/api/admin/fixtures/url/generate', reqInterceptor.validateToken, reqInterceptor.confirmAdminRole, fixturesController.generateFixtureUrl);
 
-router.get('/user/activity/teams/:id?', reqInterceptor.validateToken, activityController.viewTeams);
-router.get('/user/activity/fixtures/:status', reqInterceptor.validateToken, activityController.viewFixturesByStatus);
+router.get('/api/user/activity/teams/:id?', reqInterceptor.validateToken, activityController.viewTeams);
+router.get('/api/user/activity/fixtures/:status', reqInterceptor.validateToken, activityController.viewFixturesByStatus);
 
-router.get('/search-url/*', searchController.viewFixturesByUrl);
-router.post('/search/league', searchController.searchLeague);
+router.get('/api/search-url/*', searchController.viewFixturesByUrl);
+router.post('/api/search/league', searchController.searchLeague);
 
 module.exports = router;
