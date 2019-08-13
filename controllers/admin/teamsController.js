@@ -126,7 +126,7 @@ exports.modifyTeam = async (req, res)=>{
 
             res.send({
                 code: '00',
-                message: `Team info has been updated succesfully. ${onSuccess.nModified} parameter(s) modified`
+                message: `Team info has been updated succesfully. ${onSuccess.nModified} document(s) modified`
             });
         })
         .catch(err=>{
