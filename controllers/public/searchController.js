@@ -18,7 +18,9 @@ exports.viewFixturesByUrl = async (req, res)=>{
             message: "Invalid url"
         });
 
-        Fixtures.findOne({url: fixtureUrl}).then(fixture=>{
+        Fixtures.findOne({ $text: { $search: fixtureUrl }}).then(fixture=>{
+            console.log(fixtureUrl)
+            console.log(fixture);
             return res.send({
                 code: "00",
                 message: fixture || []

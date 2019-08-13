@@ -19,18 +19,18 @@ const fixtureSchema = new mongoose.Schema({
     },
     url:{
         type: String,
-        default: 'N/A',
-        unique: true
+        default: 'N/A'
     },
     scorers:{
         type: String,
-        default: 'pending',
+        default: 'pending'
     },
     matchStatus:{
         type: String,
         default: 'pending',
     }
 });
+
 
 if(!fixtureSchema.indexes()){
     fixtureSchema.index({ '$**': 'text' });
