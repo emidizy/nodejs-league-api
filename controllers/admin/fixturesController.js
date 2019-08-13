@@ -171,7 +171,7 @@ exports.modifyFixture = async (req, res)=>{
 
                 return res.send({
                     code: '00',
-                    message: `Fixture info has been updated succesfully. ${onSuccess.nModified} parameters modified`,
+                    message: `Fixture info has been updated succesfully. ${onSuccess.nModified} parameter(s) modified`,
                     data: teamInfo || []
                 });
             });
