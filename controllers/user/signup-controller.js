@@ -38,7 +38,7 @@ exports.register =  async (req, res) => {
                         newUser.save().then(onSuccess=>{
                             res.send({
                                 code: '00',
-                                message: 'Registration successful'
+                                message: 'Registration successful. Login to access Premier league resources'
                             });
                         })
                         .catch(err=>{

@@ -27,7 +27,7 @@ exports.signIn =  async (req, res) => {
                             req.session.accessToken = token;
                             return res.send({
                                 code: '00',
-                                message: 'Login successful!. Your session ends in 10 minutes'
+                                message: 'Login successful!. Your session ends in 15 minutes'
                             });
                         },
                         err=>{

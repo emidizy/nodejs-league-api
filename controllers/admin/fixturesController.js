@@ -31,7 +31,7 @@ exports.create = async (req, res)=>{
         }
 
         Teams.findOne({_id: homeTeamId}).then(homeTeamInfo=>{
-            console.log(homeTeamInfo);
+            //console.log(homeTeamInfo);
             let homeTeam = homeTeamInfo.name;
             Teams.findOne({_id: awayTeamId}).then(awayTeamInfo=>{
                 let awayTeam = awayTeamInfo.name;
@@ -171,7 +171,7 @@ exports.modifyFixture = async (req, res)=>{
 
                 return res.send({
                     code: '00',
-                    message: `Fixture info has been updated succesfully. ${onSuccess.nModified} document modified`,
+                    message: `Fixture info has been updated succesfully. ${onSuccess.nModified} parameters modified`,
                     data: teamInfo || []
                 });
             });
@@ -197,7 +197,7 @@ exports.deleteFixture = async (req, res)=>{
     try{
        
         let id = req.params.id;
-        console.log(id)
+       // console.log(id)
         if(!id) return res.status(400).send({
             code: '01',
             message: 'Fixture id required'
@@ -251,7 +251,7 @@ exports.generateFixtureUrl = async (req, res)=>{
             
             var newvalues = { $set: updateParams };
             Fixtures.updateOne(condition, newvalues).then(onSuccess=>{
-
+                console.log('FixtureUrl:', generatedUrl);
                 return res.send({
                     code: '00',
                     message: `Fixture url generated successfully. (You may open url on a browser to view fixture)`,

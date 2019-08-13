@@ -1,6 +1,7 @@
 // Import Team schema/model
 Fixtures = require('../../database/schemas/fixtures');
 Teams = require('../../database/schemas/teams');
+const bcrypt = require('../../utilities/cipher');
 const reqInterceptor = require('../../interceptors/request-token');
 const express = require("express");
 const router = express.Router();
@@ -118,3 +119,39 @@ exports.viewFixturesByStatus = async (req, res)=>{
 
 }
 
+exports.deleteUserProfile = async (req, res)=>{
+    let result = 0;
+    const {email, password} = req.body;
+    if (!email || !password) {
+        return res.status(400).send({
+            code: '01',
+            message: 'Invalid request body'
+        });
+    }
+    
+    User.findOne({email: email}).then(user=>{
+        if(user){
+            //Confirm identity of user deleting his profile
+            //check if password is correct
+            let isValidPassword = bcrypt.verifyHash(password, user.password);
+            if(isValidPassword){
+                User.deleteOne({email: email}).then(result=>{
+                    return res.send({deleteCount: result.n});
+                }).catch(err=>{
+                    console.log('Err',err)
+                    return res.send({deleteCount: 0});
+                })
+            }
+            else{
+                console.log(user)
+                return res.status(403).send({deleteCount: 0});
+            }
+        }
+        else return res.status(404).send({
+            code: '02',
+            message: 'invalid username and/or password'
+        });
+    });
+    
+}
+        

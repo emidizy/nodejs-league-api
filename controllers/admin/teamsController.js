@@ -123,9 +123,10 @@ exports.modifyTeam = async (req, res)=>{
         
         var newvalues = { $set: updateParams };
         Teams.updateOne(condition, newvalues).then(onSuccess=>{
+
             res.send({
                 code: '00',
-                message: `Team info has been updated succesfully. ${onSuccess.modifiedCount} parameters modified`
+                message: `Team info has been updated succesfully. ${onSuccess.nModified} parameters modified`
             });
         })
         .catch(err=>{
